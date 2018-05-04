@@ -9,7 +9,7 @@ import (
 	"github.com/devopsfaith/krakend/config"
 	"github.com/devopsfaith/krakend/proxy"
 
-	"github.schibsted.io/spt-infrastructure/apigw-krakend/cbreaker"
+	cbreaker "github.com/tgracchus/krakend-cbreaker"
 )
 
 func BenchmarkNewCircuitBreakerMiddleware_ok(b *testing.B) {

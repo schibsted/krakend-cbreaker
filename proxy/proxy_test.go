@@ -7,8 +7,9 @@ import (
 	"github.com/devopsfaith/krakend/config"
 	"github.com/devopsfaith/krakend/proxy"
 
-	"github.schibsted.io/spt-infrastructure/apigw-krakend/cbreaker"
 	"net/http"
+
+	cbreaker "github.com/tgracchus/krakend-cbreaker"
 )
 
 func TestNewMiddleware_multipleNext(t *testing.T) {

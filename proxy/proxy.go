@@ -6,9 +6,10 @@ import (
 	"github.com/devopsfaith/krakend/config"
 	"github.com/devopsfaith/krakend/proxy"
 
-	"github.com/afex/hystrix-go/hystrix"
-	"github.schibsted.io/spt-infrastructure/apigw-krakend/cbreaker"
 	"net/http"
+
+	"github.com/afex/hystrix-go/hystrix"
+	cbreaker "github.com/tgracchus/krakend-cbreaker"
 )
 
 // BackendFactory adds a cb middleware wrapping the internal factory
