@@ -5,10 +5,6 @@ import (
 
 	"github.com/devopsfaith/krakend/config"
 	"github.com/devopsfaith/krakend/proxy"
-
-	"net/http"
-
-	"github.com/afex/hystrix-go/hystrix"
 )
 
 // BackendFactory adds a cb middleware wrapping the internal factory
@@ -17,8 +13,6 @@ func BackendFactory(next proxy.BackendFactory) proxy.BackendFactory {
 		return NewMiddleware(cfg)(next(cfg))
 	}
 }
-
-var Backend500Error = hystrix.CircuitError{"Backend 500 error"}
 
 // NewMiddleware builds a middleware based on the extra config params or fallbacks to the next proxy
 func NewMiddleware(remote *config.Backend) proxy.Middleware {
@@ -43,19 +37,8 @@ func NewCbRequest(cb *HystrixCommand, next proxy.Proxy) proxy.Proxy {
 		err := cb.Execute(func() error {
 			var err error
 			response, err = next(ctx, request)
-			if response != nil {
-				if response.Metadata.StatusCode == http.StatusInternalServerError {
-					return Backend500Error
-				}
-			}
 			return err
 		}, nil)
-		if err != nil {
-			if err == Backend500Error {
-				return response, err
-			}
-			return response, nil
-		}
 		return response, err
 	}
 }

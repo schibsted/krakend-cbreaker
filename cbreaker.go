@@ -6,7 +6,7 @@ import (
 )
 
 // Namespace is the key to use to store and access the custom config data
-const Namespace = "spt/gateway/backend/cbreaker"
+const Namespace = "github.com/tgracchus/krakend-cbreaker"
 
 // Config is the custom config struct containing the params for the sony/gobreaker package
 type Config struct {
@@ -28,10 +28,11 @@ func ConfigGetter(e config.ExtraConfig) interface{} {
 	if !ok {
 		return ZeroCfg
 	}
-	tmp, ok := v.(map[interface{}]interface{})
+	tmp, ok := v.(map[string]interface{})
 	if !ok {
 		return ZeroCfg
 	}
+
 	cfg := Config{}
 	if v, ok := tmp["command_name"]; ok {
 		cfg.CommandName = v.(string)

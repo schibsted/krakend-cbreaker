@@ -2,6 +2,7 @@ package cbreaker
 
 import (
 	"context"
+	"errors"
 	"testing"
 
 	"github.com/devopsfaith/krakend/config"
@@ -9,6 +10,8 @@ import (
 
 	"net/http"
 )
+
+var Backend500Error error = errors.New("Backend500Error")
 
 func TestNewMiddleware_multipleNext(t *testing.T) {
 	defer func() {
@@ -22,7 +25,7 @@ func TestNewMiddleware_multipleNext(t *testing.T) {
 func TestNewMiddleware_zeroConfig(t *testing.T) {
 	cfg := &config.Backend{
 		ExtraConfig: map[string]interface{}{
-			Namespace: map[interface{}]interface{}{
+			Namespace: map[string]interface{}{
 				"command_name":             "test_cmd",
 				"sleep_window":             10.0,
 				"max_concurrent_requests":  15.0,
@@ -141,8 +144,8 @@ func TestNewMiddleware_ko_with_500(t *testing.T) {
 	}
 
 	_, actualErr = p(context.Background(), &request)
-	if actualErr != nil {
-		t.Error("error unexpected")
+	if actualErr != Backend500Error {
+		t.Error("error expected")
 	}
 
 }

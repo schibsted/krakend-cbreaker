@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "max_idle_connections": 250,
+  "timeout": "3000ms",
+  "read_timeout": "0s",
+  "write_timeout": "0s",
+  "idle_timeout": "0s",
+  "read_header_timeout": "0s",
+  "name": "Test",
+  "endpoints": [
+    {
+      "endpoint": "/cbcrash",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/crash",
+          "host": [
+            "http://localhost:8000"
+          ],
+          "extra_config": {
+            "github.com/tgracchus/krakend-cbreaker": {
+              "command_name": "crash",
+              "sleep_window": 10000.0,
+              "max_concurrent_requests": 1.0,
+              "error_percent_threshold": 1.0,
+              "request_volume_threshold": 1.0,
+              "timeout": 1000.0
+            }
+          }
+        }
+      ],
+      "timeout": "1500ms",
+      "max_rate": "10000"
+    }
+  ]
+}
