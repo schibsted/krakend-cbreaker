@@ -16,7 +16,7 @@ import (
 	"testing"
 	"time"
 
-  cbreaker "github.com/tgracchus/krakend-cbreaker"
+  cbreaker "github.com/schibsted/krakend-cbreaker"
 	"github.com/devopsfaith/krakend/config"
 	"github.com/devopsfaith/krakend/logging"
 	"github.com/devopsfaith/krakend/proxy"
@@ -89,7 +89,7 @@ For a more detailed description please, visit: [https://github.com/Netflix/Hystr
             "http://localhost:8000"
           ],
           "extra_config": {
-            "github.com/tgracchus/krakend-cbreaker": {
+            "github.com/schibsted/krakend-cbreaker": {
               "command_name": "crash",
               "sleep_window": 10000.0,
               "max_concurrent_requests": 1.0,

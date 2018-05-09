@@ -11,7 +11,7 @@ import (
 )
 
 // Namespace is the key to use to store and access the custom config data
-const Namespace = "github.com/tgracchus/krakend-cbreaker"
+const Namespace = "github.com/schibsted/krakend-cbreaker"
 
 // Config is the custom config struct containing the params for the sony/gobreaker package
 type Config struct {

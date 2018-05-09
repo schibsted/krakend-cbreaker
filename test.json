@@ -18,7 +18,7 @@
             "http://localhost:8000"
           ],
           "extra_config": {
-            "github.com/tgracchus/krakend-cbreaker": {
+            "github.com/schibsted/krakend-cbreaker": {
               "command_name": "crash",
               "sleep_window": 10000.0,
               "max_concurrent_requests": 1.0,
